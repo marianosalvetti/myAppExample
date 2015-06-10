@@ -10,8 +10,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
-public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerCallbacks {
+public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
