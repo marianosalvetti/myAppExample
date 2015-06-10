@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.appexample.marianosalvetti.com.myappexample"
+        minSdkVersion 9
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        // TODO: Define what to do with lint issues
+        abortOnError false
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('../keystore/dev.keystore')
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+        release {
+            storeFile file('../keystore/keystore')
+            storePassword "dedcdg09"
+            keyAlias "msalvetti"
+            keyPassword "dedcdg09"
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            signingConfig signingConfigs.debug
+            debuggable true
+//            minifyEnabled true
+//            zipAlignEnabled true
+//            proguardFile 'proguard-rules.pro'
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            debuggable false
+            //  minifyEnabled false
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Renaming output file name.
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def tempApk = new File(
+                    output.outputFile.parent,
+                    output.outputFile.name.replace(".apk", "-${variant.versionName}-signed-aligned.apk"))
+
+            output.outputFile = new File(
+                    tempApk.parent,
+                    tempApk.name.replace("-" + variant.buildType.name, ""))
+        }
+    }
+
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+ //   wearApp project(':wear')
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.google.android.gms:play-services:7.5.0'
+    compile 'com.android.support:support-v4:22.2.0'
+    compile 'com.android.support:recyclerview-v7:22.2.0'
+}

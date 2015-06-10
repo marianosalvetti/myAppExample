@@ -1,0 +1,4 @@
+0lUsRKGL-MWXoZ1WrEdxwnlzPnWBho5xSvnW42g
+
+This key is good for all apps signed with your certificate whose fingerprint is:
+66:81:5A:37:2E:E8:44:11:07:54:D0:89:AC:A7:B3:42

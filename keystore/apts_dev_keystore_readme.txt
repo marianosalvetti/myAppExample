@@ -1,0 +1,6 @@
+alias:
+androiddebugkey
+
+password:
+android
+
