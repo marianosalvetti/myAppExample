@@ -1,9 +1,19 @@
 package com.appexample.marianosalvetti.com.myappexample.slidemenu;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,9 +24,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.appexample.marianosalvetti.com.myappexample.R;
-import com.appexample.marianosalvetti.com.myappexample.utils.LoggingUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +37,12 @@ import java.util.List;
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
+/**
+ * Fragment used for managing interactions for and presentation of a navigation drawer.
+ * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
+ * design guidelines</a> for a complete explanation of the behaviors implemented here.
+ */
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallbacks {
-
-    private static final String LOG_TAG = "NavDrawer";
 
     /**
      * Remember the position of the selected item.
@@ -40,7 +54,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
      * expands it. This shared preference tracks this.
      */
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
-
 
     /**
      * A pointer to the current callbacks instance (the Activity).
@@ -110,11 +123,11 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     }
 
     public List<NavigationItem> getMenu() {
-        LoggingUtility.d(LOG_TAG, "starting the Menu items ");
         List<NavigationItem> items = new ArrayList<NavigationItem>();
-        items.add(new NavigationItem("item 1", getResources().getDrawable(R.drawable.ic_menu_check)));
-        items.add(new NavigationItem("item 2", getResources().getDrawable(R.drawable.ic_menu_check)));
-        items.add(new NavigationItem("item 3", getResources().getDrawable(R.drawable.ic_menu_check)));
+        items.add(new NavigationItem(getString(R.string.search), getResources().getDrawable(R.drawable.ic_action_search)));
+        items.add(new NavigationItem(getString(R.string.stats), getResources().getDrawable(R.drawable.ic_action_trending_up)));
+        items.add(new NavigationItem(getString(R.string.myaccount), getResources().getDrawable(R.drawable.ic_action_account_box)));
+        items.add(new NavigationItem(getString(R.string.settings), getResources().getDrawable(R.drawable.ic_action_settings)));
         return items;
     }
 
@@ -126,7 +139,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
      * @param toolbar      The Toolbar of the activity.
      */
     public void setup(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
-        mFragmentContainerView = getActivity().findViewById(fragmentId);
+        mFragmentContainerView = (View) getActivity().findViewById(fragmentId).getParent();
         mDrawerLayout = drawerLayout;
 
         mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.myPrimaryDarkColor));
@@ -137,7 +150,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
                 super.onDrawerClosed(drawerView);
                 if (!isAdded()) return;
 
-                getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
 
             @Override
@@ -150,7 +163,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
                             .getDefaultSharedPreferences(getActivity());
                     sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
-                getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
             }
         };
 
@@ -219,4 +232,96 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         mActionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    public void setUserData(String user, String email, Bitmap avatar) {
+        ImageView avatarContainer = (ImageView) mFragmentContainerView.findViewById(R.id.imgAvatar);
+        ((TextView) mFragmentContainerView.findViewById(R.id.txtUserEmail)).setText(email);
+        ((TextView) mFragmentContainerView.findViewById(R.id.txtUsername)).setText(user);
+        avatarContainer.setImageDrawable(new RoundImage(avatar));
+    }
+
+    public View getGoogleDrawer() {
+        return mFragmentContainerView.findViewById(R.id.googleDrawer);
+    }
+
+    public static class RoundImage extends Drawable {
+        private final Bitmap mBitmap;
+        private final Paint mPaint;
+        private final RectF mRectF;
+        private final int mBitmapWidth;
+        private final int mBitmapHeight;
+
+        public RoundImage(Bitmap bitmap) {
+            mBitmap = bitmap;
+            mRectF = new RectF();
+            mPaint = new Paint();
+            mPaint.setAntiAlias(true);
+            mPaint.setDither(true);
+            final BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            mPaint.setShader(shader);
+
+            mBitmapWidth = mBitmap.getWidth();
+            mBitmapHeight = mBitmap.getHeight();
+        }
+
+        @Override
+        public void draw(Canvas canvas) {
+            canvas.drawOval(mRectF, mPaint);
+        }
+
+        @Override
+        protected void onBoundsChange(Rect bounds) {
+            super.onBoundsChange(bounds);
+            mRectF.set(bounds);
+        }
+
+        @Override
+        public void setAlpha(int alpha) {
+            if (mPaint.getAlpha() != alpha) {
+                mPaint.setAlpha(alpha);
+                invalidateSelf();
+            }
+        }
+
+        @Override
+        public void setColorFilter(ColorFilter cf) {
+            mPaint.setColorFilter(cf);
+        }
+
+        @Override
+        public int getOpacity() {
+            return PixelFormat.TRANSLUCENT;
+        }
+
+        @Override
+        public int getIntrinsicWidth() {
+            return mBitmapWidth;
+        }
+
+        @Override
+        public int getIntrinsicHeight() {
+            return mBitmapHeight;
+        }
+
+        public void setAntiAlias(boolean aa) {
+            mPaint.setAntiAlias(aa);
+            invalidateSelf();
+        }
+
+        @Override
+        public void setFilterBitmap(boolean filter) {
+            mPaint.setFilterBitmap(filter);
+            invalidateSelf();
+        }
+
+        @Override
+        public void setDither(boolean dither) {
+            mPaint.setDither(dither);
+            invalidateSelf();
+        }
+
+        public Bitmap getBitmap() {
+            return mBitmap;
+        }
+
+    }
 }
