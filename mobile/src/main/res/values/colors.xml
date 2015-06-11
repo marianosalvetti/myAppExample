@@ -19,4 +19,5 @@
     <drawable name="pressed_gray">#0c000000</drawable>
     <drawable name="selected_gray">#2c000000</drawable>
     <color name="selected_gray">#2c000000</color>
+    <color name="holo_red_dark">#ffcc0000</color>
 </resources>

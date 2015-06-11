@@ -1,12 +1,19 @@
 <resources>
     <string name="app_name">My App Example</string>
+    <!-- Start Menu titles-->
+    <string name="search">Search</string>
+    <string name="stats">Stats</string>
+    <string name="myaccount">My Account</string>
+    <string name="settings">Settings</string>
+    <string name="example">Other Example</string>
+
+    <!-- end Menu titles -->
     <string name="drawer_open">Menu opened</string>
     <string name="drawer_close">Menu closed</string>
     <string name="action_settings">Settings</string>
-    <string name="settings">Settings</string>
-    <string name="myaccount">My Account</string>
-    <string name="stats">Stats</string>
-    <string name="search">Search</string>
+
     <string name="action_search">Search</string>
     <string name="action_filter">Filter</string>
+    <string name="title_activity_saludo">Saludo Activity</string>
+    <string name="hello_world">Hello world!</string>
 </resources>

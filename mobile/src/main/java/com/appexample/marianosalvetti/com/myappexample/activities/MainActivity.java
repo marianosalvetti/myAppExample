@@ -1,6 +1,7 @@
 package com.appexample.marianosalvetti.com.myappexample.activities;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -101,6 +102,19 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
                 }
                 getFragmentManager().beginTransaction().replace(R.id.container, fragment, SettingsFragment.TAG).commit();
                 setTitle("settings");
+
+                break;
+
+            case 4: //other activity, for example //todo
+                Intent intent = new Intent(MainActivity.this, SaludoActivity.class);
+                //Creamos la informacion a pasar entre actividades
+                Bundle b = new Bundle();
+                b.putString("NOMBRE","el parametro");
+                //Agrego la informacion al intent
+                intent.putExtras(b);
+
+                //Iniciamos la nueva actividad
+                startActivity(intent);
                 break;
         }
     }
