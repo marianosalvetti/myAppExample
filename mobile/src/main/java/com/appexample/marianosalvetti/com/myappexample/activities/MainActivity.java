@@ -10,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.appexample.marianosalvetti.com.myappexample.fragments.ItemFragment;
+import com.appexample.marianosalvetti.com.myappexample.fragments.MyAccountFragment;
+import com.appexample.marianosalvetti.com.myappexample.fragments.SearchFragment;
+import com.appexample.marianosalvetti.com.myappexample.fragments.SettingsFragment;
 import com.appexample.marianosalvetti.com.myappexample.fragments.StatsFragment;
 import com.appexample.marianosalvetti.com.myappexample.slidemenu.NavigationDrawerCallbacks;
 import com.appexample.marianosalvetti.com.myappexample.slidemenu.NavigationDrawerFragment;
@@ -51,12 +53,12 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
         // Set up initial Fragment
         Fragment fragment;
-        fragment = getFragmentManager().findFragmentByTag(StatsFragment.TAG);
+        fragment = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
         if (fragment == null) {
-            fragment = new StatsFragment();
+            fragment = new SearchFragment();
         }
-        getFragmentManager().beginTransaction().replace(R.id.container, fragment, StatsFragment.TAG).commit();
-
+        getFragmentManager().beginTransaction().replace(R.id.container, fragment, SearchFragment.TAG).commit();
+        setTitle("Search");
     }
 
     @Override
@@ -67,19 +69,38 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         Fragment fragment;
         switch (position) {
             case 0: //search//todo
+                fragment = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
+                if (fragment == null) {
+                    fragment = new SearchFragment();
+                }
+                getFragmentManager().beginTransaction().replace(R.id.container, fragment, SearchFragment.TAG).commit();
+                setTitle("Search");
                 break;
-            case 1: //blanck
+            case 1: //stats
                 fragment = getFragmentManager().findFragmentByTag(StatsFragment.TAG);
                 if (fragment == null) {
                     fragment = new StatsFragment();
                 }
                 getFragmentManager().beginTransaction().replace(R.id.container, fragment, StatsFragment.TAG).commit();
+                setTitle("Stats");
                 break;
 
             case 2: //my account //todo
+                fragment = getFragmentManager().findFragmentByTag(MyAccountFragment.TAG);
+                if (fragment == null) {
+                    fragment = new MyAccountFragment();
+                }
+                getFragmentManager().beginTransaction().replace(R.id.container, fragment, MyAccountFragment.TAG).commit();
+                setTitle("my account");
                 break;
 
             case 3: //settings //todo
+                fragment = getFragmentManager().findFragmentByTag(SettingsFragment.TAG);
+                if (fragment == null) {
+                    fragment = new SettingsFragment();
+                }
+                getFragmentManager().beginTransaction().replace(R.id.container, fragment, SettingsFragment.TAG).commit();
+                setTitle("settings");
                 break;
         }
     }
@@ -124,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 
 }
