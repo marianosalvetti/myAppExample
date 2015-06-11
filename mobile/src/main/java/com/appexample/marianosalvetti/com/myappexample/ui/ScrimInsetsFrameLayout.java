@@ -1,4 +1,4 @@
-package com.appexample.marianosalvetti.com.myappexample.sandbox;
+package com.appexample.marianosalvetti.com.myappexample.ui;
 
 
 import android.content.Context;

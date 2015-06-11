@@ -23,7 +23,7 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-        <com.appexample.marianosalvetti.com.myappexample.sandbox.ScrimInsetsFrameLayout
+        <com.appexample.marianosalvetti.com.myappexample.ui.ScrimInsetsFrameLayout
             android:id="@+id/scrimInsetsFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,6 +37,6 @@
                 android:layout_width="@dimen/navigation_drawer_width"
                 android:layout_height="match_parent" android:layout_gravity="start"
                 app:layout="@layout/fragment_navigation_drawer" />
-        </com.appexample.marianosalvetti.com.myappexample.sandbox.ScrimInsetsFrameLayout>
+        </com.appexample.marianosalvetti.com.myappexample.ui.ScrimInsetsFrameLayout>
 
  </android.support.v4.widget.DrawerLayout>
