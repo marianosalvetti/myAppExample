@@ -1,16 +1,19 @@
-package com.appexample.marianosalvetti.com.myappexample;
+package com.appexample.marianosalvetti.com.myappexample.activities;
 
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.appexample.marianosalvetti.com.myappexample.slidemenu.NavigationDrawerCallbacks;
+import com.appexample.marianosalvetti.com.myappexample.slidemenu.NavigationDrawerFragment;
+import com.appexample.marianosalvetti.com.myappexample.R;
 
-public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
+
+public class MainActivity extends AppCompatActivity implements NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.

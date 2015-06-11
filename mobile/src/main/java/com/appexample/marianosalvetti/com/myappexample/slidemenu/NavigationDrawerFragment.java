@@ -1,19 +1,9 @@
-package com.appexample.marianosalvetti.com.myappexample;
+package com.appexample.marianosalvetti.com.myappexample.slidemenu;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,8 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.appexample.marianosalvetti.com.myappexample.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,8 +72,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         mDrawerList = (RecyclerView) view.findViewById(R.id.drawerList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());

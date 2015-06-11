@@ -5,6 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         applicationId "com.appexample.marianosalvetti.com.myappexample"
         minSdkVersion 9
         targetSdkVersion 22
@@ -78,4 +79,6 @@ dependencies {
     compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
 }

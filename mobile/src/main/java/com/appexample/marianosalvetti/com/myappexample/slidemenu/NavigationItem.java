@@ -1,4 +1,4 @@
-package com.appexample.marianosalvetti.com.myappexample;
+package com.appexample.marianosalvetti.com.myappexample.slidemenu;
 
 
 import android.graphics.drawable.Drawable;

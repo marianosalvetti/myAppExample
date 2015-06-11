@@ -1,4 +1,4 @@
-package com.appexample.marianosalvetti.com.myappexample;
+package com.appexample.marianosalvetti.com.myappexample.slidemenu;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.appexample.marianosalvetti.com.myappexample.R;
 
 import java.util.List;
 
