@@ -4,7 +4,8 @@ package com.appexample.marianosalvetti.com.myappexample.slidemenu;
 import android.graphics.drawable.Drawable;
 
 /**
- * Created by poliveira on 24/10/2014.
+ * Created by Mariano Salvetti
+ *
  */
 public class NavigationItem {
     private String mText;

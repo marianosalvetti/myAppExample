@@ -11,9 +11,12 @@ import android.widget.Toast;
 import com.appexample.marianosalvetti.com.myappexample.slidemenu.NavigationDrawerCallbacks;
 import com.appexample.marianosalvetti.com.myappexample.slidemenu.NavigationDrawerFragment;
 import com.appexample.marianosalvetti.com.myappexample.R;
+import com.appexample.marianosalvetti.com.myappexample.utils.LoggingUtility;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerCallbacks {
+
+    private static final String LOG_TAG = "MainActivity";
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         Toast.makeText(this, "Menu item selected -> " + position, Toast.LENGTH_SHORT).show();
+        LoggingUtility.d(LOG_TAG, "Menu item selected -> " + position);
     }
 
 

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.appexample.marianosalvetti.com.myappexample.R;
+import com.appexample.marianosalvetti.com.myappexample.utils.LoggingUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,8 @@ import java.util.List;
  */
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallbacks {
 
+    private static final String LOG_TAG = "NavDrawer";
+
     /**
      * Remember the position of the selected item.
      */
@@ -37,6 +40,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
      * expands it. This shared preference tracks this.
      */
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
+
 
     /**
      * A pointer to the current callbacks instance (the Activity).
@@ -106,6 +110,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     }
 
     public List<NavigationItem> getMenu() {
+        LoggingUtility.d(LOG_TAG, "starting the Menu items ");
         List<NavigationItem> items = new ArrayList<NavigationItem>();
         items.add(new NavigationItem("item 1", getResources().getDrawable(R.drawable.ic_menu_check)));
         items.add(new NavigationItem("item 2", getResources().getDrawable(R.drawable.ic_menu_check)));

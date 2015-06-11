@@ -36,19 +36,20 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.drawer_row, viewGroup, false);
         final ViewHolder viewHolder = new ViewHolder(v);
         viewHolder.itemView.setClickable(true);
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                                                   @Override
-                                                   public void onClick(View v) {
-                                                       if (mSelectedView != null) {
-                                                           mSelectedView.setSelected(false);
-                                                       }
-                                                       mSelectedPosition = viewHolder.getAdapterPosition();
-                                                       v.setSelected(true);
-                                                       mSelectedView = v;
-                                                       if (mNavigationDrawerCallbacks != null)
-                                                           mNavigationDrawerCallbacks.onNavigationDrawerItemSelected(viewHolder.getAdapterPosition());
-                                                   }
-                                               }
+        viewHolder.itemView.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mSelectedView != null) {
+                            mSelectedView.setSelected(false);
+                        }
+                        mSelectedPosition = viewHolder.getAdapterPosition();
+                        v.setSelected(true);
+                        mSelectedView = v;
+                        if (mNavigationDrawerCallbacks != null)
+                            mNavigationDrawerCallbacks.onNavigationDrawerItemSelected(viewHolder.getAdapterPosition());
+                    }
+                }
         );
         viewHolder.itemView.setBackgroundResource(R.drawable.row_selector);
         return viewHolder;
