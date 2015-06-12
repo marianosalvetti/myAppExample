@@ -1,16 +1,18 @@
 package com.appexample.marianosalvetti.com.myappexample.activities;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
+
+import com.appexample.marianosalvetti.com.myappexample.fragments.FragmentRecibeParams;
 import com.appexample.marianosalvetti.com.myappexample.fragments.MyAccountFragment;
 import com.appexample.marianosalvetti.com.myappexample.fragments.SearchFragment;
 import com.appexample.marianosalvetti.com.myappexample.fragments.SettingsFragment;
@@ -21,7 +23,8 @@ import com.appexample.marianosalvetti.com.myappexample.R;
 import com.appexample.marianosalvetti.com.myappexample.utils.LoggingUtility;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationDrawerCallbacks {
+public class MainActivity extends AppCompatActivity implements NavigationDrawerCallbacks,
+        SearchFragment.OnArticuloSelectedListener {
 
     private static final String LOG_TAG = "MainActivity";
 
@@ -54,11 +57,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
         // Set up initial Fragment
         Fragment fragment;
-        fragment = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
+        fragment = getSupportFragmentManager().findFragmentByTag(SearchFragment.TAG);
         if (fragment == null) {
             fragment = new SearchFragment();
         }
-        getFragmentManager().beginTransaction().replace(R.id.container, fragment, SearchFragment.TAG).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, SearchFragment.TAG).commit();
         setTitle("Search");
     }
 
@@ -70,37 +73,37 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         Fragment fragment;
         switch (position) {
             case 0: //search//todo
-                fragment = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
+                fragment = getSupportFragmentManager().findFragmentByTag(SearchFragment.TAG);
                 if (fragment == null) {
                     fragment = new SearchFragment();
                 }
-                getFragmentManager().beginTransaction().replace(R.id.container, fragment, SearchFragment.TAG).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, SearchFragment.TAG).commit();
                 setTitle("Search");
                 break;
             case 1: //stats
-                fragment = getFragmentManager().findFragmentByTag(StatsFragment.TAG);
+                fragment = getSupportFragmentManager().findFragmentByTag(StatsFragment.TAG);
                 if (fragment == null) {
                     fragment = new StatsFragment();
                 }
-                getFragmentManager().beginTransaction().replace(R.id.container, fragment, StatsFragment.TAG).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, StatsFragment.TAG).commit();
                 setTitle("Stats");
                 break;
 
             case 2: //my account //todo
-                fragment = getFragmentManager().findFragmentByTag(MyAccountFragment.TAG);
+                fragment = getSupportFragmentManager().findFragmentByTag(MyAccountFragment.TAG);
                 if (fragment == null) {
                     fragment = new MyAccountFragment();
                 }
-                getFragmentManager().beginTransaction().replace(R.id.container, fragment, MyAccountFragment.TAG).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, MyAccountFragment.TAG).commit();
                 setTitle("my account");
                 break;
 
             case 3: //settings //todo
-                fragment = getFragmentManager().findFragmentByTag(SettingsFragment.TAG);
+                fragment = getSupportFragmentManager().findFragmentByTag(SettingsFragment.TAG);
                 if (fragment == null) {
                     fragment = new SettingsFragment();
                 }
-                getFragmentManager().beginTransaction().replace(R.id.container, fragment, SettingsFragment.TAG).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, SettingsFragment.TAG).commit();
                 setTitle("settings");
 
                 break;
@@ -161,5 +164,22 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
     }
 
 
+    @Override
+    public void onArticuloSelected(String str) {
+        Fragment fragmentRecibeParams = getSupportFragmentManager().findFragmentByTag(FragmentRecibeParams.TAG);
+        if (fragmentRecibeParams == null) {
+            fragmentRecibeParams = new FragmentRecibeParams();
+        }
+        Bundle args = new Bundle();
+        args.putString("str", str);
+        fragmentRecibeParams.setArguments(args);
 
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragmentRecibeParams, FragmentRecibeParams.TAG);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+        setTitle("Recibe Params");
+
+    }
 }

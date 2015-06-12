@@ -4,9 +4,19 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/texto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Example Search in 1st Fragment"
-        android:id="@+id/textView" />
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:padding="20dp"
+        android:background="#669900"
+        android:text="Select Element on list"/>
+
+    <ListView
+        android:id="@id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/texto"/>
+
 </LinearLayout>

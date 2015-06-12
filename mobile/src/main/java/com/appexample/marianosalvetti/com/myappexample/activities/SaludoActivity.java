@@ -2,16 +2,24 @@ package com.appexample.marianosalvetti.com.myappexample.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.appexample.marianosalvetti.com.myappexample.R;
+import com.appexample.marianosalvetti.com.myappexample.utils.LoggingUtility;
 
-public class SaludoActivity extends ActionBarActivity {
+/**
+ * Activity que se lanza desde el menu lateral, y contiene un Fragment
+ */
+public class SaludoActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LoggingUtility.d(LOG_TAG, "Starting the onCreate method in SaludoActivity");
         setContentView(R.layout.activity_saludo);
     }
 
